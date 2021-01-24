@@ -1,0 +1,99 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.0.44/wavesurfer.min.js"></script>
+<link rel="stylesheet" href="https://wavesurfer-js.org/css/ribbon.css">
+    <link rel="stylesheet" href="https://wavesurfer-js.org/css/style.css">
+<style>
+  html { 
+  background: #000 url(http://www.ultraimg.com/images/2016/07/11/tumblr_static_tumblr_static_dri3mjpwwvks8cogk44ckgo88_640.gif) no-repeat center center fixed; 
+  background-size: cover;
+}
+body {
+    height: 100%;
+}
+#waveform .progress {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.progress[value] {
+    -webkit-appearance: none;
+    color: #eb00ff;
+    border: 0;
+    -moz-appearance: none;
+    appearance: none;
+}
+.progress {
+    display: block;
+    width: 100%;
+    height: 1rem;
+    margin-bottom: 1rem;
+}
+audio, canvas, progress, video {
+    display: inline-block;
+    vertical-align: baseline;
+}
+*, *::after, *::before {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+</style>
+<div class="demo">
+
+          <div id="waveform">
+            <progress id="progress" class="progress progress-striped" value="0" max="100"></progress>
+         
+          </div>
+
+          <div class="controls">
+            <button class="btn btn-primary" onclick="wavesurfer.skipBackward()">
+              <i class="fa fa-step-backward"></i>
+              Backward
+            </button>
+
+            <button class="btn btn-primary" onclick="wavesurfer.playPause()">
+              <i class="fa fa-play"></i>
+              Play
+              /
+              <i class="fa fa-pause"></i>
+              Pause
+            </button>
+
+            <button class="btn btn-primary" onclick="wavesurfer.skipForward()">
+              <i class="fa fa-step-forward"></i>
+              Forward
+            </button>
+
+            <button class="btn btn-primary" onclick="wavesurfer.toggleMute()">
+              <i class="fa fa-volume-off"></i>
+              Toggle Mute
+            </button>
+          </div>
+        </div>
+
+<script>
+ var ctx = document.createElement('canvas').getContext('2d');
+            var linGrad = ctx.createLinearGradient(0, 64, 0, 200);
+            linGrad.addColorStop(0.5, 'rgba(255, 255, 255, 1.000)');
+            linGrad.addColorStop(0.5, 'rgba(183, 183, 183, 1.000)');
+
+            var wavesurfer = WaveSurfer.create({
+              container: '#waveform',
+              waveColor: 'red',
+              backend: 'MediaElement',
+              mediaType:'audio',
+              progressColor: 'red',
+              cursorColor: 'red',
+             
+            });
+
+            wavesurfer.on('loading', function (percents) {
+              document.getElementById('progress').value = percents;
+            });
+
+            wavesurfer.on('ready', function (percents) {
+              document.getElementById('progress').style.display = 'none';
+            });
+
+            wavesurfer.load('https://api.soundcloud.com/tracks/45398925/stream?client_id=fa791b761f68cafa375ab5f7ea51927a');
+</script>
