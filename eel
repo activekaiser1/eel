@@ -37,7 +37,11 @@ audio, canvas, progress, video {
     -webkit-box-sizing: inherit;
     box-sizing: inherit;
 }
-</style>
+</style><audio controls>
+  <source src="https://api.soundcloud.com/tracks/45398925/stream?client_id=fa791b761f68cafa375ab5f7ea51927a" type="audio/wav">
+Your browser does not support the audio element.
+</audio>
+
 <div class="demo">
 
           <div id="waveform">
